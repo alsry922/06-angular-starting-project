@@ -1,22 +1,31 @@
-<article>
-  <header>
-    <img src="status.png" alt="A signal symbol" />
-    <h2>Server Status</h2>
-  </header>
-  <div>
-    <ng-container [ngSwitch]="currentStatus">
-      <ng-container *ngSwitchCase="'online'">
-        <p>Servers are online</p>
-        <p>All systems are operational.</p>
-      </ng-container>
-      <ng-container *ngSwitchCase="'offline'">
-        <p>Servers are offline</p>
-        <p>Functionality should be restored soon.</p>
-      </ng-container>
-      <ng-container *ngSwitchDefault>
-        <p>Server status is unknown</p>
-        <p>Fetching server status failed.</p>
-      </ng-container>
+<!--
+[class] 프로퍼티 바인딩 문법을 사용하면
+Angular가 내부적으로 알아서 class를 바인딩 하는 것으로 감지하여
+이 태그의 클래스 속성에 대해서 바인딩 시켜준다.
+클래스 바인딩 기능을 통해 동적으로 클래스를 추가할 수 있다.
+-->
+<!--<div [class.status]="currentStatus === 'online'">-->
+<div [class]="{
+  status: true,
+  'status-online': currentStatus === 'online',
+  'status-offline': currentStatus === 'offline',
+  'status-unknown': currentStatus === 'unknown',
+}" >
+<!--     [style]="{-->
+<!--  fontSize: '64px',-->
+<!--}"-->
+  <ng-container [ngSwitch]="currentStatus">
+    <ng-container *ngSwitchCase="'online'">
+      <p>Servers are online</p>
+      <p>All systems are operational.</p>
     </ng-container>
-  </div>
-</article>
+    <ng-container *ngSwitchCase="'offline'">
+      <p>Servers are offline</p>
+      <p>Functionality should be restored soon.</p>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <p>Server status is unknown</p>
+      <p>Fetching server status failed.</p>
+    </ng-container>
+  </ng-container>
+</div>

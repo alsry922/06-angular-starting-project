@@ -1,15 +1,8 @@
-<article>
-  <header>
-    <img src="globe.png" alt="A globe" />
-    <h2>Traffic</h2>
-  </header>
-  <div id="traffic">
-    <p>Last 7 days</p>
+<p>Last 7 days</p>
+<div id="chart">
+  @for (dataPoint of dummyTrafficData; track dataPoint.id) {
+<!--    style 바인딩 문법을 통해 동적으로 스타일 적용도 가능하다. -->
+    <div [style.height]="(dataPoint.value / maxTraffic) * 100 + '%'"></div>
+  }
+</div>
 
-    <div id="chart">
-      @for (dataPoint of dummyTrafficData; track dataPoint.id) {
-        <div [style.height]="(dataPoint.value / maxTraffic) * 100 + '%'"></div>
-      }
-    </div>
-  </div>
-</article>
