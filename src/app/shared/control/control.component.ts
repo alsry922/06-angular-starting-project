@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, ViewEncapsulation} from '@angular/core';
+import {Component, ContentChild, ElementRef, HostListener, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -13,6 +13,10 @@ import {Component, ElementRef, HostListener, Input, ViewEncapsulation} from '@an
 })
 export class ControlComponent {
   @Input({required: true}) label!: string;
+
+  // ContentChild 데코레이터는 ViewChild 데코레이터 사용 방법과 비슷하다.
+  // Content는 부모 컴포넌트로부터 투영되는 템플릿이기 때문에 투영할 템플릿을 내려주는 부모 컴포넌트 템플릿에서 가져올 요소를 참조해야 한다.
+  @ContentChild('input') control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>;
   constructor(
     // ElementRef는 엘리먼트를 참조하는 객체임
     // 컴포넌트에 주입받음으로써, 컴포넌트의 호스트 엘리먼트를 참조하는 객체를 주입받을 수 있음.
@@ -30,5 +34,6 @@ export class ControlComponent {
   onClick() {
     console.log('clicked');
     console.log(this.el);
+    console.log(this.control);
   }
 }
